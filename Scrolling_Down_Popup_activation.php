@@ -32,7 +32,7 @@ if($wpdb->get_var("show tables like '". WP_Scrolling_Down_Popup_TABLE . "'") != 
 	$wpdb->query($sSql);
 }
 add_option('sdp_cookies', "showalways");
-add_option('sdp_widget', "RANDOM");
+//add_option('sdp_widget', "RANDOM");
 add_option('sdp_On_Homepage', "YES");
 add_option('sdp_On_Posts', "YES");
 add_option('sdp_On_Pages', "YES");

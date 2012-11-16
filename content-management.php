@@ -147,8 +147,7 @@
 	$data = $wpdb->get_results("select * from ".WP_Scrolling_Down_Popup_TABLE." order by sdp_id");
 	if ( empty($data) ) 
 	{ 
-		echo "<div id='message' class='error'>No data available! use below form to create!</div>";
-		return;
+		//echo "<div id='message' class='error'>No data available! use below form to create!</div>";
 	}
 	?>
     <form name="sdp_display" method="post">
@@ -176,7 +175,7 @@
         <?php $i = $i+1; } ?>
         <?php if($displayisthere<>"True") { ?>
         <tr>
-          <td colspan="4" align="center" style="color:#FF0000" valign="middle">No message available</td>
+          <td colspan="4" align="center" style="color:#FF0000" valign="middle">No data available</td>
         </tr>
         <?php } ?>
 		</tbody>

@@ -5,7 +5,7 @@ Plugin Name: Scrolling down popup plugin
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Description: Scrolling down popup plugin create the popup window with drop in scrolling effect. With this plugin we can confirm that particular content on your page gets attention to user. 
 Author: Gopi.R
-Version: 5.0
+Version: 6.0
 Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 License: GPLv2 or later
@@ -15,7 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 global $wpdb, $wp_version;
 define("WP_Scrolling_Down_Popup_TABLE", $wpdb->prefix . "scrolling_down_popup");
 
-function Scrolling_Down_Popup()
+function SDPopup($id)
 {
 	if(is_home() && get_option('sdp_On_Homepage') == 'YES') {	$display = "show";	}
 	if(is_single() && get_option('sdp_On_Posts') == 'YES') {	$display = "show";	}
@@ -23,18 +23,27 @@ function Scrolling_Down_Popup()
 	if(is_archive() && get_option('sdp_On_Archives') == 'YES') {	$display = "show";	}
 	if(is_search() && get_option('sdp_On_Search') == 'YES') {	$display = "show";	}
 	
+	if(is_numeric($id)) 
+	{
+		$value = $id;
+	}
+	else
+	{
+		$value = "RANDOM";
+	}
+	
 	if($display == "show")
 	{
-		Scrolling_Down_Popup_Show();
+		Scrolling_Down_Popup_Show($value);
 	}
 }
 
-function Scrolling_Down_Popup_Show()
+function Scrolling_Down_Popup_Show($value)
 {
 	global $wpdb;
 	
 	$sdp_cookies = get_option('sdp_cookies');
-	$sdp_widget = get_option('sdp_widget');
+	//$sdp_widget = get_option('sdp_widget');
 	
 	if($sdp_cookies == "showalways")
 	{
@@ -47,14 +56,12 @@ function Scrolling_Down_Popup_Show()
 	
 	$sSql = "select * from ".WP_Scrolling_Down_Popup_TABLE." where 1=1";
 	
-	if($sdp_widget == "RANDOM")
+	if($value == "RANDOM")
 	{
 		$sSql = $sSql . " Order by rand()";
 	}
 	else
 	{
-		list($caption, $value) = split('[/.:]', $sdp_widget);
-		$value = substr($value,0,(strlen($value)-1));
 		if(is_numeric(@$value)) 
 		{
 			$sSql = $sSql . " and sdp_id=$value";
@@ -185,7 +192,7 @@ function Scrolling_Down_Popup_admin_options()
 	$sdp_On_Archives = get_option('sdp_On_Archives');
 	$sdp_On_Search = get_option('sdp_On_Search');
 	$sdp_cookies = get_option('sdp_cookies');
-	$sdp_widget = get_option('sdp_widget');
+	//$sdp_widget = get_option('sdp_widget');
 	$sdp_close = get_option('sdp_close');
 	
 	if (@$_POST['sdp_submit']) 
@@ -205,33 +212,41 @@ function Scrolling_Down_Popup_admin_options()
 		update_option('sdp_On_Archives', $sdp_On_Archives );
 		update_option('sdp_On_Search', $sdp_On_Search );
 		update_option('sdp_cookies', $sdp_cookies );
-		update_option('sdp_widget', $sdp_widget );
+		//update_option('sdp_widget', $sdp_widget );
 		update_option('sdp_close', $sdp_close );
 	}
 	
 	echo '<form name="sdp_form" method="post" action="">';
 	echo '<br>';
 	
-	echo 'Display mode (Global setting) :';
-	echo '<p><input  style="width: 200px;" maxlength="100" type="text" value="';
-	echo $sdp_cookies . '" name="sdp_cookies" id="sdp_cookies" /> (showalways/oncepersession)</p>';
-	echo '<br>';
-	echo 'Popup display setting :';
-	echo '<p>On Homepage:&nbsp;<input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Homepage . '" name="sdp_On_Homepage" id="sdp_On_Homepage" /> (YES/NO) ';
-	echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On Posts:&nbsp;&nbsp;&nbsp;<input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Posts . '" name="sdp_On_Posts" id="sdp_On_Posts" /> (YES/NO) </p>';
-	echo '<p>On Pages:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Pages . '" name="sdp_On_Pages" id="sdp_On_Pages" /> (YES/NO) ';
-	echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On Search:&nbsp;<input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Archives . '" name="sdp_On_Archives" id="sdp_On_Archives" /> (YES/NO) </p>';
-	echo '<p>On Archives:&nbsp;&nbsp;&nbsp;&nbsp;<input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Search . '" name="sdp_On_Search" id="sdp_On_Search" /> (YES/NO) </p>';
+	echo 'Display Mode (Global setting) :';
+	?>
+	<p>
+	<select name="sdp_cookies" id="sdp_cookies">
+		<option value='showalways' <?php if(@$sdp_cookies=='showalways') { echo 'selected' ; } ?>>Show Always</option>
+		<option value='oncepersession' <?php if(@$sdp_cookies=='oncepersession') { echo 'selected' ; } ?>>Once Per Session</option>
+	</select>
+	</p>
+	<?php	  
+	//echo '<p><input  style="width: 200px;" maxlength="100" type="text" value="';
+	//echo $sdp_cookies . '" name="sdp_cookies" id="sdp_cookies" /> (showalways/oncepersession)</p>';
+	//echo '<br>';
+	echo 'Popup Display Setting';
+	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
+	echo $sdp_On_Homepage . '" name="sdp_On_Homepage" id="sdp_On_Homepage" /> Display On Home Page</p>';
+	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
+	echo $sdp_On_Posts . '" name="sdp_On_Posts" id="sdp_On_Posts" /> Display On Posts Page</p>';
+	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
+	echo $sdp_On_Pages . '" name="sdp_On_Pages" id="sdp_On_Pages" /> Display On Pages</p>';
+	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
+	echo $sdp_On_Archives . '" name="sdp_On_Archives" id="sdp_On_Archives" /> Display On Search Page</p>';
+	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
+	echo $sdp_On_Search . '" name="sdp_On_Search" id="sdp_On_Search" /> Display On Archives Page</p>';
 	echo '<br>';	
-	echo 'Display popup content :';
-	echo '<p><input  style="width: 200px;" maxlength="100" type="text" value="';
-	echo $sdp_widget . '" name="sdp_widget" id="sdp_widget" /> (Enter the content short code (or) Type RANDOM)</p>';
-	echo '<br>';
+	//echo 'Display popup content :';
+	//echo '<p><input  style="width: 200px;" maxlength="100" type="text" value="';
+	//echo $sdp_widget . '" name="sdp_widget" id="sdp_widget" /> (Enter the content short code (or) Type RANDOM)</p>';
+	//echo '<br>';
 	echo '<input type="submit" id="sdp_submit" name="sdp_submit" lang="publish" class="button-primary" value="Update Setting" value="1" />';
 	include_once("button.php");
 	
