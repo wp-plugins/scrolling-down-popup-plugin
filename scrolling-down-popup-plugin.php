@@ -5,7 +5,7 @@ Plugin Name: Scrolling down popup plugin
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Description: Scrolling down popup plugin create the popup window with drop in scrolling effect. With this plugin we can confirm that particular content on your page gets attention to user. 
 Author: Gopi.R
-Version: 6.0
+Version: 7.0
 Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 License: GPLv2 or later
@@ -14,6 +14,11 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 global $wpdb, $wp_version;
 define("WP_Scrolling_Down_Popup_TABLE", $wpdb->prefix . "scrolling_down_popup");
+
+define("WP_sdp_UNIQUE_NAME", "scrolling-down-popup-plugin");
+define("WP_sdp_TITLE", "Scrolling down popup plugin");
+define('WP_sdp_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/">click here</a>');
+define('WP_sdp_FAV', 'http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/');
 
 function SDPopup($id)
 {
@@ -163,98 +168,79 @@ function Scrolling_Down_Popup_Show($value)
 
 function Scrolling_Down_Popup_activation()
 {
-	include_once("Scrolling_Down_Popup_activation.php");
+	global $wpdb;
+	if($wpdb->get_var("show tables like '". strtoupper(WP_Scrolling_Down_Popup_TABLE) . "'") != strtoupper(WP_Scrolling_Down_Popup_TABLE)) 
+	{
+		$wpdb->query("
+			CREATE TABLE IF NOT EXISTS `". WP_Scrolling_Down_Popup_TABLE . "` (
+			  `sdp_id` int(11) NOT NULL auto_increment,
+			  `sdp_text` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+			  `sdp_width` int(11) NOT NULL,
+			  `sdp_left_space` int(11) NOT NULL,
+			  `sdp_top_space` int(11) NOT NULL,
+			  `sdp_speed` int(11) NOT NULL,
+			  `sdp_border` VARCHAR(30) NOT NULL,
+			  `sdp_background` VARCHAR(10) NOT NULL,
+			  `sdp_closebutton` VARCHAR(20) NOT NULL,
+			  `sdp_font` VARCHAR(100) NOT NULL,
+			  `sdp_font_size` VARCHAR(10) NOT NULL,
+			  `sdp_date` datetime NOT NULL default '0000-00-00 00:00:00',
+			  PRIMARY KEY  (`sdp_id`) )
+			");
+		
+		$c1 = $c1.'<p align="left"><img style="margin: 5px;text-align:left;float:left;" title="Gopi" src="'.get_option('siteurl').'/wp-content/plugins/scrolling-down-popup-plugin/gopiplus.com-popup.png" alt="Gopi" />This is the demo for cool fade popup plugin. using this plugin you can add this cool popup window into your wordpress website. using this unblockable popup window  you can add your ads, special information, offers and announcements. Close this popup and read the article you can easily configure this plugin in your wordpress website. its very simple. please feel free to post you comments and feedback.</p>';
+		
+		$c2 = $c2.'<p align="left"><img style="margin: 5px;text-align:left;float:right;" title="Gopi" src="'.get_option('siteurl').'/wp-content/plugins/scrolling-down-popup-plugin/gopiplus.com-popup.png" alt="Gopi" />This is the demo for cool fade popup plugin. using this plugin you can add this cool popup window into your wordpress website. using this unblockable popup window  you can add your ads, special information, offers and announcements. Close this popup and read the article you can easily configure this plugin in your wordpress website. its very simple. please feel free to post you comments and feedback.</p>';
+		
+		$iIns = "INSERT INTO `". WP_Scrolling_Down_Popup_TABLE . "` (`sdp_text`, `sdp_width`, `sdp_left_space`, `sdp_top_space`, `sdp_speed`, `sdp_border`, `sdp_background`, `sdp_closebutton`, `sdp_font`, `sdp_font_size`)"; 
+		$sSql = $iIns . " VALUES ('$c1', 320, 500, 200, 15, '2px solid #666', '#FFFFFF' , 'right-bottom', 'Verdana, Geneva, sans-serif', '11');";
+		$wpdb->query($sSql);
+		$sSql = $iIns . " VALUES ('$c2', 420, 0, 0, 15, '2px solid #000000', '#DFDFFF' , 'right-bottom', 'Comic Sans MS, cursive', '11');";
+		$wpdb->query($sSql);
+		$sSql = $iIns . " VALUES ('$c1', 520, 500, 200, 15, '2px solid #oeoeoe', '#FFFFFF' , 'right-bottom', 'Verdana, Geneva, sans-serif', '11');";
+		$wpdb->query($sSql);
+	}
+	add_option('sdp_cookies', "showalways");
+	//add_option('sdp_widget', "RANDOM");
+	add_option('sdp_On_Homepage', "YES");
+	add_option('sdp_On_Posts', "YES");
+	add_option('sdp_On_Pages', "YES");
+	add_option('sdp_On_Archives', "NO");
+	add_option('sdp_On_Search', "NO");
 }
 
 function Scrolling_Down_Popup_deactivate()
 {
-	
+	// No action required.
 }
 
 function Scrolling_Down_Popup_add_to_menu()
 {
 	if (is_admin()) 
 	{
-		add_options_page('Scrolling down popup','Scrolling down popup','manage_options',__FILE__,'Scrolling_Down_Popup_admin_options');  
-		add_options_page('Scrolling down popup', '', 'manage_options', "scrolling-down-popup-plugin/content-management.php",'' );
+		add_options_page('Scrolling down popup','Scrolling down popup','manage_options', 'scrolling-down-popup-plugin','Scrolling_Down_Popup_admin_options');  
 	}
 }
 
 function Scrolling_Down_Popup_admin_options()
 {
-	
-	echo '<div class="wrap">';
-	echo '<h2>Scrolling down popup</h2>';
-    
-	$sdp_On_Homepage = get_option('sdp_On_Homepage');
-	$sdp_On_Posts = get_option('sdp_On_Posts');
-	$sdp_On_Pages = get_option('sdp_On_Pages');
-	$sdp_On_Archives = get_option('sdp_On_Archives');
-	$sdp_On_Search = get_option('sdp_On_Search');
-	$sdp_cookies = get_option('sdp_cookies');
-	//$sdp_widget = get_option('sdp_widget');
-	$sdp_close = get_option('sdp_close');
-	
-	if (@$_POST['sdp_submit']) 
+	global $wpdb;
+	$current_page = isset($_GET['ac']) ? $_GET['ac'] : '';
+	switch($current_page)
 	{
-		$sdp_On_Homepage = stripslashes(trim($_POST['sdp_On_Homepage']));
-		$sdp_On_Posts = stripslashes(trim($_POST['sdp_On_Posts']));
-		$sdp_On_Pages = stripslashes(trim($_POST['sdp_On_Pages']));
-		$sdp_On_Archives = stripslashes(trim($_POST['sdp_On_Archives']));
-		$sdp_On_Search = stripslashes(trim($_POST['sdp_On_Search']));
-		$sdp_cookies = stripslashes(trim($_POST['sdp_cookies']));
-		$sdp_widget = stripslashes(trim($_POST['sdp_widget']));
-		$sdp_close = stripslashes(trim($_POST['sdp_close']));
-		
-		update_option('sdp_On_Homepage', $sdp_On_Homepage );
-		update_option('sdp_On_Posts', $sdp_On_Posts );
-		update_option('sdp_On_Pages', $sdp_On_Pages );
-		update_option('sdp_On_Archives', $sdp_On_Archives );
-		update_option('sdp_On_Search', $sdp_On_Search );
-		update_option('sdp_cookies', $sdp_cookies );
-		//update_option('sdp_widget', $sdp_widget );
-		update_option('sdp_close', $sdp_close );
-	}
-	
-	echo '<form name="sdp_form" method="post" action="">';
-	echo '<br>';
-	
-	echo 'Display Mode (Global setting) :';
-	?>
-	<p>
-	<select name="sdp_cookies" id="sdp_cookies">
-		<option value='showalways' <?php if(@$sdp_cookies=='showalways') { echo 'selected' ; } ?>>Show Always</option>
-		<option value='oncepersession' <?php if(@$sdp_cookies=='oncepersession') { echo 'selected' ; } ?>>Once Per Session</option>
-	</select>
-	</p>
-	<?php	  
-	//echo '<p><input  style="width: 200px;" maxlength="100" type="text" value="';
-	//echo $sdp_cookies . '" name="sdp_cookies" id="sdp_cookies" /> (showalways/oncepersession)</p>';
-	//echo '<br>';
-	echo 'Popup Display Setting';
-	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Homepage . '" name="sdp_On_Homepage" id="sdp_On_Homepage" /> Display On Home Page</p>';
-	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Posts . '" name="sdp_On_Posts" id="sdp_On_Posts" /> Display On Posts Page</p>';
-	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Pages . '" name="sdp_On_Pages" id="sdp_On_Pages" /> Display On Pages</p>';
-	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Archives . '" name="sdp_On_Archives" id="sdp_On_Archives" /> Display On Search Page</p>';
-	echo '<p>(YES/NO) <input  style="width: 50px;" type="text" value="';
-	echo $sdp_On_Search . '" name="sdp_On_Search" id="sdp_On_Search" /> Display On Archives Page</p>';
-	echo '<br>';	
-	//echo 'Display popup content :';
-	//echo '<p><input  style="width: 200px;" maxlength="100" type="text" value="';
-	//echo $sdp_widget . '" name="sdp_widget" id="sdp_widget" /> (Enter the content short code (or) Type RANDOM)</p>';
-	//echo '<br>';
-	echo '<input type="submit" id="sdp_submit" name="sdp_submit" lang="publish" class="button-primary" value="Update Setting" value="1" />';
-	include_once("button.php");
-	
-	echo '</form>';
-	
-	include_once("help.php");
-    
-	echo '</div>';  
+		case 'edit':
+			include('pages/content-management-edit.php');
+			break;
+		case 'add':
+			include('pages/content-management-add.php');
+			break;
+		case 'set':
+			include('pages/content-setting.php');
+			break;
+		default:
+			include('pages/content-management-show.php');
+			break;
+	} 
 }
 
 add_shortcode( 'scroll-down-popup', 'Scrolling_Down_Popup_shortcode' );

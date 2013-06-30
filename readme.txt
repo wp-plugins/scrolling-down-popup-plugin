@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpre
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Tags: scrolling, popup, plugin
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 6.0
+Tested up to: 3.6
+Stable tag: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -80,6 +80,12 @@ Tested up to 3.5
 New PHP code to load the popup into website.
 Small change in the admin interface.
 
+= 7.0 =
+
+Tested up to 3.6
+New admin interface.
+Added few security features.
+
 == Upgrade Notice ==
 
 = 1.0 =
@@ -110,3 +116,9 @@ New demo link, http://www.gopiplus.com
 Tested up to 3.5
 New PHP code to load the popup into website.
 Small change in the admin interface.
+
+= 7.0 =
+
+Tested up to 3.6
+New admin interface.
+Added few security features.
