@@ -1,0 +1,311 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Scrolling down popup plugin 7.1\n"
+"POT-Creation-Date: 2014-01-30 23:07+0800\n"
+"PO-Revision-Date: 2014-01-30 23:07+0800\n"
+"Last-Translator: \n"
+"Language-Team: www.gopiplus.com <www.gopiplus.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../scrolling-down-popup-plugin.php:112
+#: ../scrolling-down-popup-plugin.php:328
+msgid "Check your short code, May be invalid ID in the shortcode."
+msgstr ""
+
+#: ../scrolling-down-popup-plugin.php:239
+#: ../scrolling-down-popup-plugin.php:240
+msgid "Scrolling down popup"
+msgstr ""
+
+#: ../pages/content-management-add.php:32
+#: ../pages/content-management-edit.php:60
+msgid "Please enter popup text."
+msgstr ""
+
+#: ../pages/content-management-add.php:38
+#: ../pages/content-management-edit.php:66
+msgid "Please enter popup width."
+msgstr ""
+
+#: ../pages/content-management-add.php:44
+#: ../pages/content-management-edit.php:72
+msgid "Please enter popup left space."
+msgstr ""
+
+#: ../pages/content-management-add.php:50
+#: ../pages/content-management-edit.php:78
+msgid "Please enter popup top space."
+msgstr ""
+
+#: ../pages/content-management-add.php:74
+msgid "Details was successfully added."
+msgstr ""
+
+#: ../pages/content-management-add.php:107
+#: ../pages/content-management-edit.php:130
+msgid "Click Here"
+msgstr ""
+
+#: ../pages/content-management-add.php:107
+#: ../pages/content-management-edit.php:130
+msgid "View the details"
+msgstr ""
+
+#: ../pages/content-management-add.php:115
+#: ../pages/content-management-edit.php:138
+#: ../pages/content-management-show.php:51 ../pages/content-setting.php:5
+msgid "Scrolling down popup plugin"
+msgstr ""
+
+#: ../pages/content-management-add.php:117
+msgid "Add popop"
+msgstr ""
+
+#: ../pages/content-management-add.php:118
+#: ../pages/content-management-edit.php:141
+msgid "Popup text"
+msgstr ""
+
+#: ../pages/content-management-add.php:120
+#: ../pages/content-management-edit.php:143
+msgid "Add popup text in the box, we can add HTML content"
+msgstr ""
+
+#: ../pages/content-management-add.php:122
+#: ../pages/content-management-edit.php:145
+msgid "Popup window width"
+msgstr ""
+
+#: ../pages/content-management-add.php:124
+#: ../pages/content-management-edit.php:147
+msgid "Enter width of the popup window, this is mandatory field."
+msgstr ""
+
+#: ../pages/content-management-add.php:126
+#: ../pages/content-management-edit.php:149
+msgid "Position (left space)"
+msgstr ""
+
+#: ../pages/content-management-add.php:128
+#: ../pages/content-management-edit.php:151
+msgid "Enter window left position, this is mandatory field."
+msgstr ""
+
+#: ../pages/content-management-add.php:130
+#: ../pages/content-management-edit.php:153
+msgid "Position (top space)"
+msgstr ""
+
+#: ../pages/content-management-add.php:132
+#: ../pages/content-management-edit.php:155
+msgid "Enter window top position, this is mandatory field."
+msgstr ""
+
+#: ../pages/content-management-add.php:134
+#: ../pages/content-management-edit.php:157
+msgid "Scrolling speed"
+msgstr ""
+
+#: ../pages/content-management-add.php:136
+#: ../pages/content-management-edit.php:159
+msgid "Enter scrolling speed, this is mandatory field."
+msgstr ""
+
+#: ../pages/content-management-add.php:138
+#: ../pages/content-management-edit.php:161
+msgid "Popup window border"
+msgstr ""
+
+#: ../pages/content-management-add.php:140
+#: ../pages/content-management-edit.php:163
+msgid "Enter popup window border as per example."
+msgstr ""
+
+#: ../pages/content-management-add.php:142
+#: ../pages/content-management-edit.php:165
+msgid "Close button position"
+msgstr ""
+
+#: ../pages/content-management-add.php:149
+#: ../pages/content-management-edit.php:172
+msgid "Select popup window close button position."
+msgstr ""
+
+#: ../pages/content-management-add.php:151
+#: ../pages/content-management-edit.php:174
+msgid "Background color"
+msgstr ""
+
+#: ../pages/content-management-add.php:153
+#: ../pages/content-management-edit.php:176
+msgid "Enter background color of the popup window as per example."
+msgstr ""
+
+#: ../pages/content-management-add.php:155
+#: ../pages/content-management-edit.php:178
+msgid "Font name"
+msgstr ""
+
+#: ../pages/content-management-add.php:157
+#: ../pages/content-management-edit.php:180
+msgid "Enter popup window font as per example."
+msgstr ""
+
+#: ../pages/content-management-add.php:159
+#: ../pages/content-management-edit.php:182
+msgid "Font size"
+msgstr ""
+
+#: ../pages/content-management-add.php:161
+#: ../pages/content-management-edit.php:184
+msgid "Enter the popup window font style as per example."
+msgstr ""
+
+#: ../pages/content-management-add.php:166
+msgid "Insert Details"
+msgstr ""
+
+#: ../pages/content-management-add.php:167
+#: ../pages/content-management-edit.php:190 ../pages/content-setting.php:96
+msgid "Cancel"
+msgstr ""
+
+#: ../pages/content-management-add.php:168
+#: ../pages/content-management-edit.php:191
+#: ../pages/content-management-show.php:118 ../pages/content-setting.php:97
+msgid "Help"
+msgstr ""
+
+#: ../pages/content-management-add.php:174
+#: ../pages/content-management-edit.php:197
+#: ../pages/content-management-show.php:128 ../pages/content-setting.php:103
+msgid "Check official website for more information"
+msgstr ""
+
+#: ../pages/content-management-add.php:175
+#: ../pages/content-management-edit.php:198
+#: ../pages/content-management-show.php:129 ../pages/content-setting.php:104
+msgid "click here"
+msgstr ""
+
+#: ../pages/content-management-edit.php:16
+msgid "Oops, selected details doesnt exist."
+msgstr ""
+
+#: ../pages/content-management-edit.php:113
+msgid "Details was successfully updated."
+msgstr ""
+
+#: ../pages/content-management-edit.php:140
+msgid "Edit popop"
+msgstr ""
+
+#: ../pages/content-management-edit.php:189
+msgid "Update Details"
+msgstr ""
+
+#: ../pages/content-management-show.php:21
+msgid "Oops, selected details doesnt exist"
+msgstr ""
+
+#: ../pages/content-management-show.php:39
+msgid "Selected record was successfully deleted."
+msgstr ""
+
+#: ../pages/content-management-show.php:52
+#: ../pages/content-management-show.php:116
+msgid "Add New"
+msgstr ""
+
+#: ../pages/content-management-show.php:65
+#: ../pages/content-management-show.php:73
+msgid "Popup Content"
+msgstr ""
+
+#: ../pages/content-management-show.php:66
+#: ../pages/content-management-show.php:74
+msgid "Short Code"
+msgstr ""
+
+#: ../pages/content-management-show.php:67
+#: ../pages/content-management-show.php:75
+msgid "Id"
+msgstr ""
+
+#: ../pages/content-management-show.php:92
+msgid "Edit"
+msgstr ""
+
+#: ../pages/content-management-show.php:94
+msgid "Delete"
+msgstr ""
+
+#: ../pages/content-management-show.php:106
+msgid "No records available."
+msgstr ""
+
+#: ../pages/content-management-show.php:117
+msgid "Display Setting"
+msgstr ""
+
+#: ../pages/content-management-show.php:122
+msgid "Plugin configuration option"
+msgstr ""
+
+#: ../pages/content-management-show.php:124
+msgid "Add plugin in the posts or pages using short code."
+msgstr ""
+
+#: ../pages/content-management-show.php:125
+msgid "Add directly in to the theme using PHP code."
+msgstr ""
+
+#: ../pages/content-setting.php:41
+msgid "Details successfully updated."
+msgstr ""
+
+#: ../pages/content-setting.php:50
+msgid "Display Mode (Global setting)"
+msgstr ""
+
+#: ../pages/content-setting.php:52
+msgid "Show always"
+msgstr ""
+
+#: ../pages/content-setting.php:53
+msgid "Once per session"
+msgstr ""
+
+#: ../pages/content-setting.php:57
+msgid "Popup window display setting"
+msgstr ""
+
+#: ../pages/content-setting.php:59
+msgid "Display on home page"
+msgstr ""
+
+#: ../pages/content-setting.php:66
+msgid "Display on posts"
+msgstr ""
+
+#: ../pages/content-setting.php:73
+msgid "Display on pages"
+msgstr ""
+
+#: ../pages/content-setting.php:80
+msgid "Display on archives pages"
+msgstr ""
+
+#: ../pages/content-setting.php:87
+msgid "Display on search pages"
+msgstr ""
+
+#: ../pages/content-setting.php:95
+msgid "Submit"
+msgstr ""

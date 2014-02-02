@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: Scrolling down popup plugin
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Description: Scrolling down popup plugin create the popup window with drop in scrolling effect. With this plugin we can confirm that particular content on your page gets attention to user. 
 Author: Gopi.R
-Version: 7.0
+Version: 7.1
 Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 License: GPLv2 or later
@@ -14,11 +13,19 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 global $wpdb, $wp_version;
 define("WP_Scrolling_Down_Popup_TABLE", $wpdb->prefix . "scrolling_down_popup");
+define('WP_SDP_FAV', 'http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/');
 
-define("WP_sdp_UNIQUE_NAME", "scrolling-down-popup-plugin");
-define("WP_sdp_TITLE", "Scrolling down popup plugin");
-define('WP_sdp_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/">click here</a>');
-define('WP_sdp_FAV', 'http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/');
+if ( ! defined( 'WP_SDP_BASENAME' ) )
+	define( 'WP_SDP_BASENAME', plugin_basename( __FILE__ ) );
+	
+if ( ! defined( 'WP_SDP_PLUGIN_NAME' ) )
+	define( 'WP_SDP_PLUGIN_NAME', trim( dirname( WP_SDP_BASENAME ), '/' ) );
+	
+if ( ! defined( 'WP_SDP_PLUGIN_URL' ) )
+	define( 'WP_SDP_PLUGIN_URL', WP_PLUGIN_URL . '/' . WP_SDP_PLUGIN_NAME );
+	
+if ( ! defined( 'WP_SDP_ADMIN_URL' ) )
+	define( 'WP_SDP_ADMIN_URL', get_option('siteurl') . '/wp-admin/options-general.php?page=scrolling-down-popup-plugin' );
 
 function SDPopup($id)
 {
@@ -75,6 +82,16 @@ function Scrolling_Down_Popup_Show($value)
 	
 	$sSql = $sSql . " LIMIT 0,1";
 	
+	$sdp_width = 300;
+	$sdp_left_space = 500;
+	$sdp_top_space = 200;
+	$sdp_speed = 15;
+	$sdp_border = "2px solid #CCC";
+	$sdp_background = "#FFFFFF";
+	$sdp_closebutton = "right-top";
+	$sdp_font = "";
+	$sdp_font_size = "";
+	
 	$data = $wpdb->get_results($sSql);
 	if ( ! empty($data) ) 
 	{
@@ -92,7 +109,7 @@ function Scrolling_Down_Popup_Show($value)
 	}
 	else
 	{
-		$sdp_text = "Check your filter condtion($value)";
+		$sdp_text = __('Check your short code, May be invalid ID in the shortcode.', 'scrolling-down');
 	}
 	
 	if($sdp_font <> "") { $sdp_font = "font-family: ".$sdp_font.";"; }
@@ -120,11 +137,11 @@ function Scrolling_Down_Popup_Show($value)
 		$sdp_closebutton = "right: 5px;bottom:5px;";
 	}
 	
-	if(!is_numeric(@$sdp_width)) { @$sdp_width = 300 ;}
-	if(!is_numeric(@$sdp_left_space)) { @$sdp_left_space = 500 ;}
-	if(!is_numeric(@$sdp_top_space)) { @$sdp_top_space = 200 ;}
-	if(!is_numeric(@$sdp_speed)) { @$sdp_speed = 15 ;}
-	if(!is_numeric(@$sdp_font_size)) { @$sdp_font_size = 11 ;}
+	if(!is_numeric($sdp_width)) { $sdp_width = 300 ;}
+	if(!is_numeric($sdp_left_space)) { $sdp_left_space = 500 ;}
+	if(!is_numeric($sdp_top_space)) { $sdp_top_space = 200 ;}
+	if(!is_numeric($sdp_speed)) { $sdp_speed = 15 ;}
+	if(!is_numeric($sdp_font_size)) { $sdp_font_size = 11 ;}
 	
 	$sdp_width_new = $sdp_width - 20;
 	?>
@@ -158,17 +175,19 @@ function Scrolling_Down_Popup_Show($value)
 	</script>
     <div id="scrolling-down-popup-plugin-top">
         <div id="scrolling-down-popup-plugin"> 
-            <div style="position: absolute;<?php echo $sdp_closebutton; ?>"><a href="#" onClick="dismissboxv2();return false"><img src="<?php echo get_option('siteurl') ; ?>/wp-content/plugins/scrolling-down-popup-plugin/close.jpg" /></a></div>
+            <div style="position: absolute;<?php echo $sdp_closebutton; ?>"><a href="#" onClick="dismissboxv2();return false"><img src="<?php echo WP_SDP_PLUGIN_URL; ?>/close.jpg" /></a></div>
 			<?php echo $sdp_text; ?>
         </div>
     </div>
-    <script type="text/javascript" src="<?php echo get_option('siteurl') ; ?>/wp-content/plugins/scrolling-down-popup-plugin/scrolling-down-popup-plugin.js"></script>
+    <script type="text/javascript" src="<?php echo WP_SDP_PLUGIN_URL; ?>/scrolling-down-popup-plugin.js"></script>
     <?php
 }
 
 function Scrolling_Down_Popup_activation()
 {
 	global $wpdb;
+	$c1 = "";
+	$c2 = "";
 	if($wpdb->get_var("show tables like '". strtoupper(WP_Scrolling_Down_Popup_TABLE) . "'") != strtoupper(WP_Scrolling_Down_Popup_TABLE)) 
 	{
 		$wpdb->query("
@@ -185,11 +204,10 @@ function Scrolling_Down_Popup_activation()
 			  `sdp_font` VARCHAR(100) NOT NULL,
 			  `sdp_font_size` VARCHAR(10) NOT NULL,
 			  `sdp_date` datetime NOT NULL default '0000-00-00 00:00:00',
-			  PRIMARY KEY  (`sdp_id`) )
+			  PRIMARY KEY  (`sdp_id`) ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 			");
 		
 		$c1 = $c1.'<p align="left"><img style="margin: 5px;text-align:left;float:left;" title="Gopi" src="'.get_option('siteurl').'/wp-content/plugins/scrolling-down-popup-plugin/gopiplus.com-popup.png" alt="Gopi" />This is the demo for cool fade popup plugin. using this plugin you can add this cool popup window into your wordpress website. using this unblockable popup window  you can add your ads, special information, offers and announcements. Close this popup and read the article you can easily configure this plugin in your wordpress website. its very simple. please feel free to post you comments and feedback.</p>';
-		
 		$c2 = $c2.'<p align="left"><img style="margin: 5px;text-align:left;float:right;" title="Gopi" src="'.get_option('siteurl').'/wp-content/plugins/scrolling-down-popup-plugin/gopiplus.com-popup.png" alt="Gopi" />This is the demo for cool fade popup plugin. using this plugin you can add this cool popup window into your wordpress website. using this unblockable popup window  you can add your ads, special information, offers and announcements. Close this popup and read the article you can easily configure this plugin in your wordpress website. its very simple. please feel free to post you comments and feedback.</p>';
 		
 		$iIns = "INSERT INTO `". WP_Scrolling_Down_Popup_TABLE . "` (`sdp_text`, `sdp_width`, `sdp_left_space`, `sdp_top_space`, `sdp_speed`, `sdp_border`, `sdp_background`, `sdp_closebutton`, `sdp_font`, `sdp_font_size`)"; 
@@ -218,7 +236,8 @@ function Scrolling_Down_Popup_add_to_menu()
 {
 	if (is_admin()) 
 	{
-		add_options_page('Scrolling down popup','Scrolling down popup','manage_options', 'scrolling-down-popup-plugin','Scrolling_Down_Popup_admin_options');  
+		add_options_page(__('Scrolling down popup', 'scrolling-down'),
+					__('Scrolling down popup', 'scrolling-down'),'manage_options', 'scrolling-down-popup-plugin','Scrolling_Down_Popup_admin_options');  
 	}
 }
 
@@ -279,6 +298,16 @@ function Scrolling_Down_Popup_shortcode($atts)
 	
 	$sSql = $sSql . " LIMIT 0,1";
 	
+	$sdp_width = 300;
+	$sdp_left_space = 500;
+	$sdp_top_space = 200;
+	$sdp_speed = 15;
+	$sdp_border = "2px solid #CCC";
+	$sdp_background = "#FFFFFF";
+	$sdp_closebutton = "right-top";
+	$sdp_font = "";
+	$sdp_font_size = "";
+
 	$data = $wpdb->get_results($sSql);
 	if ( ! empty($data) ) 
 	{
@@ -296,7 +325,7 @@ function Scrolling_Down_Popup_shortcode($atts)
 	}
 	else
 	{
-		$sdp_text = "Check your filter short code($value)";
+		$sdp_text = __('Check your short code, May be invalid ID in the shortcode.', 'scrolling-down');
 	}
 	
 	if($sdp_font <> "") { $sdp_font = "font-family: ".$sdp_font.";"; }
@@ -324,11 +353,11 @@ function Scrolling_Down_Popup_shortcode($atts)
 		$sdp_closebutton = "right: 5px;bottom:5px;";
 	}
 	
-	if(!is_numeric(@$sdp_width)) { @$sdp_width = 300 ;}
-	if(!is_numeric(@$sdp_left_space)) { @$sdp_left_space = 500 ;}
-	if(!is_numeric(@$sdp_top_space)) { @$sdp_top_space = 200 ;}
-	if(!is_numeric(@$sdp_speed)) { @$sdp_speed = 15 ;}
-	if(!is_numeric(@$sdp_font_size)) { @$sdp_font_size = 11 ;}
+	if(!is_numeric($sdp_width)) { $sdp_width = 300 ;}
+	if(!is_numeric($sdp_left_space)) { $sdp_left_space = 500 ;}
+	if(!is_numeric($sdp_top_space)) { $sdp_top_space = 200 ;}
+	if(!is_numeric($sdp_speed)) { $sdp_speed = 15 ;}
+	if(!is_numeric($sdp_font_size)) { $sdp_font_size = 11 ;}
 	
 	$sdp_width_new = $sdp_width - 20;
 
@@ -364,15 +393,21 @@ function Scrolling_Down_Popup_shortcode($atts)
 	
     $sdp = $sdp . '<div id="scrolling-down-popup-plugin-top">';
         $sdp = $sdp . '<div id="scrolling-down-popup-plugin">';
-            $sdp = $sdp . '<div style="position: absolute;'.$sdp_closebutton.'"><a href="#" onClick="dismissboxv2();return false"><img src="'.get_option('siteurl').'/wp-content/plugins/scrolling-down-popup-plugin/close.jpg" /></a></div>';
+            $sdp = $sdp . '<div style="position: absolute;'.$sdp_closebutton.'"><a href="#" onClick="dismissboxv2();return false"><img src="'.WP_SDP_PLUGIN_URL.'/close.jpg" /></a></div>';
 			$sdp = $sdp . $sdp_text;
         $sdp = $sdp . '</div>';
     $sdp = $sdp . '</div>';
 	
-    $sdp = $sdp . '<script type="text/javascript" src="'.get_option('siteurl').'/wp-content/plugins/scrolling-down-popup-plugin/scrolling-down-popup-plugin.js"></script>';
+    $sdp = $sdp . '<script type="text/javascript" src="'.WP_SDP_PLUGIN_URL.'/scrolling-down-popup-plugin.js"></script>';
 	return $sdp;
 }
 
+function Scrolling_Down_Popup_textdomain() 
+{
+	  load_plugin_textdomain( 'scrolling-down', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+
+add_action('plugins_loaded', 'Scrolling_Down_Popup_textdomain');
 register_activation_hook(__FILE__, 'Scrolling_Down_Popup_activation');
 add_action('admin_menu', 'Scrolling_Down_Popup_add_to_menu');
 register_deactivation_hook( __FILE__, 'Scrolling_Down_Popup_deactivate');

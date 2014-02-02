@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpre
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Tags: scrolling, popup, plugin
 Requires at least: 3.0
-Tested up to: 3.6
-Stable tag: 7.0
+Tested up to: 3.8
+Stable tag: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -47,7 +47,9 @@ Scrolling down popup plugin create the popup window with drop in scrolling effec
 
 == Screenshots ==
 
-1. http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
+1. Front End Screen http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
+
+1. Admin Screen http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 
 == Changelog ==
 
@@ -86,6 +88,12 @@ Tested up to 3.6
 New admin interface.
 Added few security features.
 
+= 7.1 =
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (scrolling-down.po) available in the languages folder.
+
 == Upgrade Notice ==
 
 = 1.0 =
@@ -122,3 +130,9 @@ Small change in the admin interface.
 Tested up to 3.6
 New admin interface.
 Added few security features.
+
+= 7.1 =
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (scrolling-down.po) available in the languages folder.
