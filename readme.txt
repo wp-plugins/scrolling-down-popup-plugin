@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpre
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Tags: scrolling, popup, plugin
 Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 7.2
+Tested up to: 4.0
+Stable tag: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -34,16 +34,13 @@ Scrolling down popup plugin create the popup window with drop in scrolling effec
 	
 == Installation ==
 
-**Installation Instruction & Configuration**  
-
 [See Installation Instruction and Configuration information and Demo](http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/)	   
 
 == Frequently Asked Questions ==
 
-**1. what kind of content can go in the window? can it do html, flash, java ect?**		
+1. What kind of content can go in the window? can add html, flash, java ect?	
 
 [Answer page](http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/)			
-[Contact](http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/)	
 
 == Screenshots ==
 
@@ -98,6 +95,11 @@ Plugin *.po file (scrolling-down.po) available in the languages folder.
 
 1. Tested up to 3.9
 
+= 7.3 =
+
+1. Tested up to 4.0
+2. Support short code in the popup (i.e You can add other plugin short code inside this popup window)
+
 == Upgrade Notice ==
 
 = 1.0 =
@@ -144,3 +146,8 @@ Plugin *.po file (scrolling-down.po) available in the languages folder.
 = 7.2 =
 
 1. Tested up to 3.9
+
+= 7.3 =
+
+1. Tested up to 4.0
+2. Support short code in the popup (i.e You can add other plugin short code inside this popup window)

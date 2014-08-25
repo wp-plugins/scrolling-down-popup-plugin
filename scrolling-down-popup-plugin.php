@@ -4,7 +4,7 @@ Plugin Name: Scrolling down popup plugin
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Description: Scrolling down popup plugin create the popup window with drop in scrolling effect. With this plugin we can confirm that particular content on your page gets attention to user. 
 Author: Gopi Ramasamy
-Version: 7.2
+Version: 7.3
 Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 License: GPLv2 or later
@@ -93,12 +93,13 @@ function Scrolling_Down_Popup_Show($value)
 	$sdp_closebutton = "right-top";
 	$sdp_font = "";
 	$sdp_font_size = "";
-	
 	$data = $wpdb->get_results($sSql);
 	if ( ! empty($data) ) 
 	{
 		$data = $data[0];
-		$sdp_text = stripslashes($data->sdp_text);
+		$sdp_temp = stripslashes($data->sdp_text);
+		$sdp_temp = do_shortcode($sdp_temp);
+		$sdp_text = $sdp_temp;	
 		$sdp_width = $data->sdp_width;
 		$sdp_left_space = $data->sdp_left_space;
 		$sdp_top_space = $data->sdp_top_space;
@@ -314,7 +315,9 @@ function Scrolling_Down_Popup_shortcode($atts)
 	if ( ! empty($data) ) 
 	{
 		$data = $data[0];
-		$sdp_text = stripslashes($data->sdp_text);
+		$sdp_temp = stripslashes($data->sdp_text);
+		$sdp_temp = do_shortcode($sdp_temp);
+		$sdp_text = $sdp_temp;
 		$sdp_width = $data->sdp_width;
 		$sdp_left_space = $data->sdp_left_space;
 		$sdp_top_space = $data->sdp_top_space;
