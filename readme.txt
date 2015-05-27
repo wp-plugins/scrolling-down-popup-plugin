@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpre
 Plugin URI: http://www.gopiplus.com/work/2011/07/23/scrolling-down-popup-wordpress-plugin/
 Tags: scrolling, popup, plugin
 Requires at least: 3.0
-Tested up to: 4.1
-Stable tag: 7.4
+Tested up to: 4.2.2
+Stable tag: 7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -104,6 +104,10 @@ Plugin *.po file (scrolling-down.po) available in the languages folder.
 
 1. Tested up to 4.1
 
+= 7.5 =
+
+1. Tested up to 4.2.2
+
 == Upgrade Notice ==
 
 = 1.0 =
@@ -159,3 +163,7 @@ Plugin *.po file (scrolling-down.po) available in the languages folder.
 = 7.4 =
 
 1. Tested up to 4.1
+
+= 7.5 =
+
+1. Tested up to 4.2.2
